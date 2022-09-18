@@ -1,6 +1,6 @@
 {
 	"name": "mots",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "My Own Tiny Serve. Simple and usefull local server to host your static files",
 	"author": "Yoannis Sanchez Soto",
 	"bin": "./bin/run",

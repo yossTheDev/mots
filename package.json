@@ -64,7 +64,9 @@
 	},
 	"bugs": "https://github.com/Apps/hello-world/issues",
 	"keywords": [
-		"oclif"
+		"oclif",
+		"cli",
+		"server"
 	],
 	"types": "dist/index.d.ts"
 }

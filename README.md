@@ -2,6 +2,9 @@
 
 My Own Tiny Server. Simple and usefull local server to host your static files.
 
+![npm](https://img.shields.io/npm/v/mots)
+![downloads/month](https://img.shields.io/npm/dm/mots)
+
 # Features
 
 * CORS Enabled

@@ -1,6 +1,6 @@
 import { Express } from 'express';
 import express = require('express');
-import c = require('ansi-colors');
+import * as c from 'ansi-colors';
 import { mkdirSync } from 'node:fs';
 import cors = require('cors');
 

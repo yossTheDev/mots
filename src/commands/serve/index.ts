@@ -1,6 +1,5 @@
 import { Command } from '@oclif/core';
 import { Server } from '../../services/server';
-import c = require('ansi-colors');
 
 export default class Serve extends Command {
 	static description = 'Initialize Server';

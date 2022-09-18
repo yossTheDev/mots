@@ -30,7 +30,7 @@ $ npm install -g mots
 $ mots COMMAND
 running command...
 $ mots (--version)
-mots/0.0.4 linux-x64 node-v16.17.0
+mots/0.0.5 linux-x64 node-v16.17.0
 $ mots --help [COMMAND]
 USAGE
   $ mots COMMAND
@@ -56,7 +56,7 @@ DESCRIPTION
   Configuration of mots
 ```
 
-_See code: [dist/commands/config/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.4/dist/commands/config/index.ts)_
+_See code: [dist/commands/config/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.5/dist/commands/config/index.ts)_
 
 ## `mots config datadir`
 
@@ -110,5 +110,5 @@ DESCRIPTION
   Initialize Server
 ```
 
-_See code: [dist/commands/serve/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.4/dist/commands/serve/index.ts)_
+_See code: [dist/commands/serve/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.5/dist/commands/serve/index.ts)_
 <!-- commandsstop -->

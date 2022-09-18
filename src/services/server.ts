@@ -1,6 +1,5 @@
 import { Express } from 'express';
 import express = require('express');
-import { greenBright } from 'ansi-colors';
 import { mkdirSync } from 'node:fs';
 import cors = require('cors');
 
@@ -27,19 +26,19 @@ export const Server = {
 
 		if (folder) {
 			app.use(express.static(folder));
-			fol = `📁 ${greenBright('FOLDER')} -> ${folder}`;
+			fol = `📁 'FOLDER' -> ${folder}`;
 		} else {
 			// app.use('/static', express.static(path.join(__dirname, '/public')));
 			app.use(express.static(`${dataDir}/public/`));
-			fol = `📁 ${greenBright('FOLDER')} -> ${dataDir}/public/`;
+			fol = `📁 'FOLDER'-> ${dataDir}/public/`;
 		}
 
 		// App Inicialization
 		app.listen(port, () => {
 			console.log(`
-			⚡️ ${greenBright('THE SERVER IS READY ')}⚡️
+			⚡️ 'THE SERVER IS READY' ⚡️
 
-🌐 ${greenBright('HOST')} -> Server is running at http://localhost:${port}
+🌐 'HOST' -> Server is running at http://localhost:${port}
 ${fol}
             `);
 		});

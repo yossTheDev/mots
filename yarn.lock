@@ -1287,13 +1287,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ansi-color@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "ansi-color@npm:0.2.1"
-  checksum: f3b809a91db1b2ec869a3bf5c0af13a4a8fa971d69a3404852b09d27e7789e1ca885ecd61d7c36f446d9c9f04980393ee099f9d02223d588a0dae19be033c4f3
-  languageName: node
-  linkType: hard
-
 "ansi-colors@npm:4.1.1":
   version: 4.1.1
   resolution: "ansi-colors@npm:4.1.1"
@@ -4936,7 +4929,6 @@ __metadata:
     "@types/express": ^4.17.13
     "@types/mocha": ^9.0.0
     "@types/node": ^16.9.4
-    ansi-color: ^0.2.1
     chai: ^4
     cors: ^2.8.5
     eslint: ^7.32.0

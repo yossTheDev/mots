@@ -16,7 +16,7 @@ export default class Serve extends Command {
 		{
 			name: 'folder',
 			description:
-				'(Optional) Folder to be hosted. If it is not provide default Public folder is served, write config datadir to know the default public directory location',
+				'(Optional) Folder to be hosted. If it is not provide default Public folder is served, write config datadir to show the default public directory location',
 			required: false,
 		},
 	];

@@ -4,10 +4,10 @@
 	"description": "My Own Tiny Serve. Simple and usefull local server to host your static files",
 	"author": "",
 	"bin": "./bin/run",
-	"homepage": "https://github.com/Apps/hello-world",
+	"homepage": "https://github.com/yossTheDev/mots",
 	"license": "MIT",
 	"main": "dist/index.js",
-	"repository": "Apps/hello-world",
+	"repository": "yossTheDev/mots",
 	"files": [
 		"/bin",
 		"/dist",

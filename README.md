@@ -1,9 +1,10 @@
 # MOTS
 
-My Own Tiny Server. Simple and usefull local server to host your static files.
-
+![screen](img/screen.png)
 ![npm](https://img.shields.io/npm/v/mots)
 ![downloads/month](https://img.shields.io/npm/dm/mots)
+
+My Own Tiny Server. Simple and usefull local server to host your static files.
 
 # Features
 

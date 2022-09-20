@@ -1,6 +1,6 @@
 # MOTS
 
-![screen](img/screen.png)
+![screenshot](img/screen.png)
 ![npm](https://img.shields.io/npm/v/mots)
 ![downloads/month](https://img.shields.io/npm/dm/mots)
 

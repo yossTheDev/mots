@@ -1,4 +1,4 @@
-import { Command } from '@oclif/core';
+import { Command, Flags } from '@oclif/core';
 import { Server } from '../../services/server';
 
 export default class Serve extends Command {
@@ -10,7 +10,14 @@ export default class Serve extends Command {
 		`,
 	]; */
 
-	static flags = {};
+	static flags = {
+		port: Flags.integer({
+			char: 'p',
+			description:
+				'App PORT Ex:8080. If this is not defined default port has to be used (4000)',
+			required: false,
+		}),
+	};
 
 	static args = [
 		{
@@ -22,8 +29,7 @@ export default class Serve extends Command {
 	];
 
 	async run(): Promise<void> {
-		const { args } = await this.parse(Serve);
-
-		Server.init(this.config.dataDir, args.folder);
+		const { args, flags } = await this.parse(Serve);
+		await Server.init(this.config.dataDir, args.folder, flags.port);
 	}
 }

@@ -4,23 +4,25 @@
 ![npm](https://img.shields.io/npm/v/mots)
 ![downloads/month](https://img.shields.io/npm/dm/mots)
 
-My Own Tiny Server. Simple and usefull local server to host your static files.
+**MOTS** (**M**y **O**wn **T**iny **S**erver). A simple tool for hosting static files. Programmed in Typescript.
 
-# Features
+  Make with ❤️ and Typescript
+  by Yoannis Sánchez Soto
 
-* CORS Enabled
+## Features
 
-# TO DO
+* Intuitive and easy to use commands
+* CORS enabled by default
+* Hosts multiple folders
+
+## TO DO
 
 * Configuration File
-* Serve multiple folders
 
 ## Map
 
 <!-- toc -->
 * [MOTS](#mots)
-* [Features](#features)
-* [TO DO](#to-do)
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
@@ -31,7 +33,7 @@ $ npm install -g mots
 $ mots COMMAND
 running command...
 $ mots (--version)
-mots/0.0.5 linux-x64 node-v16.17.0
+mots/0.0.6 linux-x64 node-v16.17.0
 $ mots --help [COMMAND]
 USAGE
   $ mots COMMAND
@@ -40,10 +42,28 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`mots about`](#mots-about)
 * [`mots config`](#mots-config)
 * [`mots config datadir`](#mots-config-datadir)
 * [`mots help [COMMAND]`](#mots-help-command)
 * [`mots serve [FOLDER]`](#mots-serve-folder)
+
+## `mots about`
+
+Show About
+
+```
+USAGE
+  $ mots about
+
+DESCRIPTION
+  Show About
+
+EXAMPLES
+  $ mots about
+```
+
+_See code: [dist/commands/about/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.6/dist/commands/about/index.ts)_
 
 ## `mots config`
 
@@ -57,7 +77,7 @@ DESCRIPTION
   Configuration of mots
 ```
 
-_See code: [dist/commands/config/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.5/dist/commands/config/index.ts)_
+_See code: [dist/commands/config/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.6/dist/commands/config/index.ts)_
 
 ## `mots config datadir`
 
@@ -101,15 +121,18 @@ Initialize Server
 
 ```
 USAGE
-  $ mots serve [FOLDER]
+  $ mots serve [FOLDER] [-p <value>]
 
 ARGUMENTS
   FOLDER  (Optional) Folder to be hosted. If it is not provide default Public folder is served, write config datadir to
           show the default public directory location
 
+FLAGS
+  -p, --port=<value>  App PORT Ex:8080. If this is not defined default port has to be used (4000)
+
 DESCRIPTION
   Initialize Server
 ```
 
-_See code: [dist/commands/serve/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.5/dist/commands/serve/index.ts)_
+_See code: [dist/commands/serve/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.6/dist/commands/serve/index.ts)_
 <!-- commandsstop -->

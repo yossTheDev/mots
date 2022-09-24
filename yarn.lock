@@ -1532,6 +1532,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"basic-ftp@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "basic-ftp@npm:5.0.2"
+  checksum: 2882c5815e55ba449e46090d044baee22ab474e1648a36668e83fe111f0b2ddbaa7de22eaf72a14e3006dcef72de0523f276ce70ee1f366e15bc7247adb74e75
+  languageName: node
+  linkType: hard
+
 "before-after-hook@npm:^2.2.0":
   version: 2.2.2
   resolution: "before-after-hook@npm:2.2.2"
@@ -4929,6 +4936,7 @@ __metadata:
     "@types/express": ^4.17.13
     "@types/mocha": ^9.0.0
     "@types/node": ^16.9.4
+    basic-ftp: ^5.0.2
     chai: ^4
     cors: ^2.8.5
     eslint: ^7.32.0
@@ -4938,7 +4946,7 @@ __metadata:
     express: ^4.18.1
     globby: ^11
     mocha: ^9
-    oclif: ^3
+    oclif: ^3.2.2
     prettier: 2.7.1
     shx: ^0.3.3
     ts-node: ^10.2.1
@@ -5321,9 +5329,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"oclif@npm:^3":
-  version: 3.2.1
-  resolution: "oclif@npm:3.2.1"
+"oclif@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "oclif@npm:3.2.2"
   dependencies:
     "@oclif/core": ^1.16.1
     "@oclif/plugin-help": ^5.1.12
@@ -5345,7 +5353,7 @@ __metadata:
     yosay: ^2.0.2
   bin:
     oclif: bin/run
-  checksum: 20ccbe4e6e890e85dfd2267c18855232b5685069847c305ff1299950773c620d7fc05b7d994474c17113c4cdfea75aa8283099d2c0cb22276d34387a468501bb
+  checksum: 11661589df7e8c8d35ca209157064c234fdf67481e9d90b80477d17d861b18a8630db0f5e718494d239efd310231486fcf689fbfd12677bd0f729c8b14f4fedc
   languageName: node
   linkType: hard
 

@@ -1,14 +1,14 @@
 import { Command, Flags } from '@oclif/core';
 import { Server } from '../../services/server';
+import colors = require('ansicolors');
 
 export default class Serve extends Command {
 	static description = 'Initialize Server';
 
-	/* static examples = [
-		`<%= config.bin %> <%= command.id %> 
-		hello world! from serve (./src/commands/hello/world.ts)
+	static examples = [
+		`<%= config.bin %> <%= command.id %> path/to/folder -p 8080
 		`,
-	]; */
+	];
 
 	static flags = {
 		port: Flags.integer({
@@ -30,6 +30,27 @@ export default class Serve extends Command {
 
 	async run(): Promise<void> {
 		const { args, flags } = await this.parse(Serve);
-		await Server.init(this.config.dataDir, args.folder, flags.port);
+
+		// Initialize server and get the app port
+		const port = await Server.init(
+			this.config.dataDir,
+			args.folder,
+			flags.port,
+		);
+
+		// Log this
+		console.log(`
+		----------------------------			
+		| ${colors.blue('⚡️ THE SERVER IS READY ⚡️')} |
+		----------------------------
+
+🌐 HOST -> Server is running at http://localhost:${port}
+		`);
+
+		if (args.folder) {
+			this.log(`📁 FOLDERS -> ${args.folder}`);
+		} else {
+			this.log(`📁 FOLDERS-> ${this.config.dataDir}/public/`);
+		}
 	}
 }

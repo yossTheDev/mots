@@ -2,7 +2,6 @@ import { Express } from 'express';
 import express = require('express');
 import { mkdirSync } from 'node:fs';
 import cors = require('cors');
-import colors = require('ansicolors');
 
 export const Server = {
 	/**
@@ -10,13 +9,13 @@ export const Server = {
 	 * @param dataDir App Data Dir
 	 * @param folder Folder to be hosted
 	 * @param port  App Port ex:8080
-	 * @return void
+	 * @return port
 	 */
 	async init(
 		dataDir: string,
 		folder: string,
 		port: string | number,
-	): Promise<void> {
+	): Promise<string | number> {
 		// Verify if Public direcotry exist
 		dataDir + mkdirSync(`${dataDir}/public/`, { recursive: true });
 
@@ -33,9 +32,6 @@ export const Server = {
 		app.use(express.json());
 		app.use(cors());
 
-		// Fol is used to log
-		let fol = '';
-
 		if (folder) {
 			// Verify if the user pass more than one folder
 			if (folder.includes(',')) {
@@ -47,26 +43,14 @@ export const Server = {
 			}
 
 			app.use(express.static(folder));
-			fol = `📁 FOLDERS -> ${folder}`;
 		} else {
-			app.get('/', () => {
-				console.log('fdfd');
-			});
 			// app.use('/static', express.static(path.join(__dirname, '/public')));
 			app.use(express.static(`${dataDir}/public/`));
-			fol = `📁 FOLDERS-> ${dataDir}/public/`;
 		}
 
 		// Server Inicialization
-		app.listen(port, () => {
-			console.log(`
-			----------------------------			
-			| ${colors.blue('⚡️ THE SERVER IS READY ⚡️')} |
-			----------------------------
+		app.listen(port);
 
-🌐 HOST -> Server is running at http://localhost:${port}
-${fol}
-            `);
-		});
+		return port;
 	},
 };

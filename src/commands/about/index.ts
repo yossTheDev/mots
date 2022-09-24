@@ -13,8 +13,8 @@ export default class About extends Command {
 	public async run(): Promise<void> {
 		this.log(`
         -----------------------
-        |        ${colors.blue('MOTS')}          |
-        |       V0.0.6         |
+        |        ${colors.blue('MOTS')}         |
+        |       V0.0.6        |
         -----------------------
 
        Make with ❤️ and Typescript

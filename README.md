@@ -132,6 +132,9 @@ FLAGS
 
 DESCRIPTION
   Initialize Server
+
+EXAMPLES
+  $ mots serve path/to/folder -p 8080
 ```
 
 _See code: [dist/commands/serve/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.6/dist/commands/serve/index.ts)_

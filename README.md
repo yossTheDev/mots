@@ -3,6 +3,7 @@
 ![screenshot](img/screen.png)
 ![npm](https://img.shields.io/npm/v/mots)
 ![downloads/month](https://img.shields.io/npm/dm/mots)
+![Telegram](https://img.shields.io/badge/t.me/yossthedev-Telegram-BLUE?style=flat&logo=Telegram) 
 
 **MOTS** (**M**y **O**wn **T**iny **S**erver). A simple tool for hosting static files. Programmed in Typescript.
 

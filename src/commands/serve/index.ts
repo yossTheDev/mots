@@ -42,7 +42,7 @@ export default class Serve extends Command {
 		// Log this
 		console.log(`
 		----------------------------			
-		| ${colors.blue('⚡️ THE SERVER IS READY ⚡️')} |
+		| ${colors.default.blue('⚡️ THE SERVER IS READY ⚡️')}|
 		----------------------------
 
 🌐 HOSTS -> Server is running at:
@@ -54,7 +54,7 @@ export default class Serve extends Command {
 			if (args.folder.includes(',')) {
 				const f = (args.folder as string).split(',');
 				this.log('📁 FOLDERS:');
-				for (const i of f) console.log(`  -> 📁 ${i}`);
+				for (const i of f) console.log(`     -> 📁 ${i}`);
 			} else {
 				this.log(`📁 FOLDER -> ${args.folder}`);
 			}

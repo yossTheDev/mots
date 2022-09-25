@@ -889,6 +889,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/ansicolors@npm:^0.0.33":
+  version: 0.0.33
+  resolution: "@types/ansicolors@npm:0.0.33"
+  checksum: ad3238775712e0d9e4b341f4e77e074fe64acdfe696e1dc829e033b378a77ab490e02b05810c49f78a5c52b054cdf8aa895f6873f527fbe99bdeb1b61f934548
+  languageName: node
+  linkType: hard
+
 "@types/body-parser@npm:*":
   version: 1.19.2
   resolution: "@types/body-parser@npm:1.19.2"
@@ -952,6 +959,15 @@ __metadata:
     "@types/minimatch": "*"
     "@types/node": "*"
   checksum: 6ae717fedfdfdad25f3d5a568323926c64f52ef35897bcac8aca8e19bc50c0bd84630bbd063e5d52078b2137d8e7d3c26eabebd1a2f03ff350fff8a91e79fc19
+  languageName: node
+  linkType: hard
+
+"@types/ip@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@types/ip@npm:1.1.0"
+  dependencies:
+    "@types/node": "*"
+  checksum: 05e1ef8b525e2f2d73f5cde7ef1e0e7aa1b027946e066b4063f9c8c2fde59a13762ec703e6df32e2db31db1dc3a54f46a7516bd6d970200d175ec7e9700bb83e
   languageName: node
   linkType: hard
 
@@ -4939,8 +4955,10 @@ __metadata:
     "@oclif/plugin-help": ^5
     "@oclif/plugin-plugins": ^2.0.1
     "@oclif/test": ^2
+    "@types/ansicolors": ^0.0.33
     "@types/chai": ^4
     "@types/express": ^4.17.13
+    "@types/ip": ^1.1.0
     "@types/mocha": ^9.0.0
     "@types/node": ^16.9.4
     basic-ftp: ^5.0.2

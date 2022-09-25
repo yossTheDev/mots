@@ -1,6 +1,6 @@
 import { Command } from '@oclif/core';
 
-export default class Datadfir extends Command {
+export default class DataDir extends Command {
 	static description = 'Configuration of mots';
 
 	/* static examples = [

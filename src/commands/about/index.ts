@@ -1,5 +1,5 @@
 import { Command } from '@oclif/core';
-import colors = require('ansicolors');
+const colors = require('ansicolors');
 
 export default class About extends Command {
 	static description = 'Show About';

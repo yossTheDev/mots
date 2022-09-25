@@ -1,7 +1,7 @@
 import { Command, Flags } from '@oclif/core';
 import { Server } from '../../services/server';
 import * as ip from 'ip';
-import colors = require('ansicolors');
+const colors = require('ansicolors');
 
 export default class Serve extends Command {
 	static description = 'Initialize Server';
@@ -42,7 +42,7 @@ export default class Serve extends Command {
 		// Log this
 		console.log(`
 		----------------------------			
-		| ${colors.default.blue('⚡️ THE SERVER IS READY ⚡️')}|
+		| ${colors.blue('⚡️ THE SERVER IS READY ⚡️')}|
 		----------------------------
 
 🌐 HOSTS -> Server is running at:

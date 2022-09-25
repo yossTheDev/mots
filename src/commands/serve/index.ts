@@ -1,5 +1,6 @@
 import { Command, Flags } from '@oclif/core';
 import { Server } from '../../services/server';
+import * as ip from 'ip';
 import colors = require('ansicolors');
 
 export default class Serve extends Command {
@@ -44,13 +45,21 @@ export default class Serve extends Command {
 		| ${colors.blue('⚡️ THE SERVER IS READY ⚡️')} |
 		----------------------------
 
-🌐 HOST -> Server is running at http://localhost:${port}
+🌐 HOSTS -> Server is running at:
+        -> http://localhost:${port}
+        -> http://${ip.address()}:${port} 
 		`);
 
 		if (args.folder) {
-			this.log(`📁 FOLDERS -> ${args.folder}`);
+			if (args.folder.includes(',')) {
+				const f = (args.folder as string).split(',');
+				this.log('📁 FOLDERS:');
+				for (const i of f) console.log(`  -> 📁 ${i}`);
+			} else {
+				this.log(`📁 FOLDER -> ${args.folder}`);
+			}
 		} else {
-			this.log(`📁 FOLDERS-> ${this.config.dataDir}/public/`);
+			this.log(`📁 FOLDER -> ${this.config.dataDir}/public/`);
 		}
 	}
 }

@@ -1,5 +1,5 @@
 import { Command } from '@oclif/core';
-// eslint-disable-next-line node/no-extraneous-require
+// eslint-disable-next-line node/no-extraneous-require, unicorn/prefer-module
 const colors = require('ansicolors');
 
 export default class About extends Command {

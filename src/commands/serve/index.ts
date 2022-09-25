@@ -1,7 +1,7 @@
 import { Command, Flags } from '@oclif/core';
 import { Server } from '../../services/server';
 import * as ip from 'ip';
-// eslint-disable-next-line node/no-extraneous-require
+// eslint-disable-next-line node/no-extraneous-require, unicorn/prefer-module
 const colors = require('ansicolors');
 
 export default class Serve extends Command {

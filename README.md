@@ -35,7 +35,7 @@ $ npm install -g mots
 $ mots COMMAND
 running command...
 $ mots (--version)
-mots/0.0.6 linux-x64 node-v16.17.0
+mots/0.0.7 linux-x64 node-v16.17.0
 $ mots --help [COMMAND]
 USAGE
   $ mots COMMAND
@@ -67,7 +67,7 @@ EXAMPLES
   $ mots about
 ```
 
-_See code: [dist/commands/about/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.6/dist/commands/about/index.ts)_
+_See code: [dist/commands/about/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.7/dist/commands/about/index.ts)_
 
 ## `mots config`
 
@@ -81,7 +81,7 @@ DESCRIPTION
   Configuration of mots
 ```
 
-_See code: [dist/commands/config/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.6/dist/commands/config/index.ts)_
+_See code: [dist/commands/config/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.7/dist/commands/config/index.ts)_
 
 ## `mots config datadir`
 
@@ -137,7 +137,7 @@ EXAMPLES
   $ mots prefab
 ```
 
-_See code: [dist/commands/prefab/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.6/dist/commands/prefab/index.ts)_
+_See code: [dist/commands/prefab/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.7/dist/commands/prefab/index.ts)_
 
 ## `mots prefab create PREFAB`
 
@@ -179,5 +179,5 @@ EXAMPLES
   $ mots serve path/to/folder -p 8080
 ```
 
-_See code: [dist/commands/serve/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.6/dist/commands/serve/index.ts)_
+_See code: [dist/commands/serve/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.7/dist/commands/serve/index.ts)_
 <!-- commandsstop -->

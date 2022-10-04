@@ -57,7 +57,7 @@ export async function getPrefabItem(
 					app.use(express.static(path.folder));
 				} else {
 					// Else simulate fake api, create get endpoint
-					app.get(`/${path.name}/` || '/', (req, res) => {
+					app.get(`${path.name}/` || '/', (req, res) => {
 						res.status(path.status || 200).send(path.response);
 					});
 				}
@@ -74,6 +74,12 @@ export async function getPrefabItem(
 	}
 }
 
+// eslint-disable-next-line valid-jsdoc
+/**
+ * Create new prefab with default data
+ * @param name Prefab Name
+ * @param dataDir Mots Data Dir
+ */
 export async function createDefaultPrefab(
 	name: string,
 	dataDir: string,
@@ -81,22 +87,28 @@ export async function createDefaultPrefab(
 	// Get prefabs folder or create it
 	fs.mkdirSync(`${dataDir}/prefabs`, { recursive: true });
 
-	// Set efault prefab data
+	// Set default prefab data
 	const defaultPrefab: prefab = {
 		port: 4004,
 		paths: [
 			{ name: '', folder: '', response: '<h1>MOTS</h1>', status: 200 },
 			{
-				name: '/getError',
+				name: '/Error',
 				folder: '',
 				response: '<h1>Not Found</h1>',
 				status: 404,
+			},
+
+			{
+				name: '/Success',
+				folder: '',
+				response: '<h1>Yes, you can 🔥</h1>',
+				status: 200,
 			},
 		],
 	};
 
 	// Save default prefab
-	console.log(dataDir);
 	fs.writeJSON(
 		path.join(dataDir, 'prefabs') + '/' + name + '.json',
 		defaultPrefab,
@@ -126,6 +138,6 @@ async function logPrefab(paths: endpoint[], port: number) {
 	`);
 
 	for (const i of paths) {
-		console.log(`      -> http://localhost:${port}/${i.name}`);
+		console.log(`      -> http://localhost:${port}${i.name}`);
 	}
 }

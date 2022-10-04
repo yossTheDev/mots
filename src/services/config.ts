@@ -4,6 +4,7 @@ import path = require('path');
 
 interface config {
 	defaultPort: number;
+	cors: boolean;
 }
 
 /**
@@ -12,10 +13,10 @@ interface config {
  * @returns config
  */
 export async function getConfig(dataDir: string): Promise<config> {
-	//  Verify if configuration File Exists
+	//  Verify if Configuration File Exists
 	if (!fs.existsSync(path.join(dataDir, 'config.json'))) {
 		// Create new Configuration Object
-		const newConfig: config = { defaultPort: 4000 };
+		const newConfig: config = { defaultPort: 4000, cors: true };
 
 		// Write new Configuration File
 		fs.writeJSON(path.join(dataDir, 'config.json'), newConfig);

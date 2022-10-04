@@ -1,4 +1,5 @@
 import { Command } from '@oclif/core';
+import path from 'node:path';
 import { createDefaultPrefab } from '../../services/prefabs';
 
 export default class Prefabs extends Command {
@@ -21,5 +22,11 @@ export default class Prefabs extends Command {
 		const { args } = await this.parse(Prefabs);
 
 		await createDefaultPrefab(args.prefab, this.config.dataDir);
+
+		this.log(
+			`💾 Prefab Saved in ${path.join(this.config.dataDir, 'prefabs')}/${
+				args.prefab
+			}.json`,
+		);
 	}
 }

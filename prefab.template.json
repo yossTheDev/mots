@@ -4,6 +4,7 @@
 		{ "name": "", "folder": "", "response": "<h1>MOTS</h1>", "status": 200 },
 		{
 			"name": "/getError",
+			"type": "redirect",
 			"folder": "",
 			"response": "<h1>Not Found</h1>",
 			"status": 404

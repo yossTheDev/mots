@@ -15,6 +15,7 @@ interface endpoint {
 	name: string;
 	folder: string;
 	status: number;
+	type?: string;
 	response: string;
 }
 
@@ -55,12 +56,16 @@ export async function getPrefabItem(
 				if (path.folder) {
 					// Serve static folder
 					app.use(express.static(path.folder));
-				} else {
-					// Else simulate fake api, create get endpoint
-					app.get(`${path.name}/` || '/', (req, res) => {
-						res.status(path.status || 200).send(path.response);
-					});
 				}
+
+				// Create get endpoint
+				app.get(`${path.name}/` || '/', (req, res) => {
+					if (path.type === 'redirect') {
+						res.status(path.status || 200).redirect(path.response);
+					} else {
+						res.status(path.status || 200).send(path.response);
+					}
+				});
 			}
 
 			// App listen

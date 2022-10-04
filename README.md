@@ -48,6 +48,8 @@ USAGE
 * [`mots config`](#mots-config)
 * [`mots config datadir`](#mots-config-datadir)
 * [`mots help [COMMAND]`](#mots-help-command)
+* [`mots prefab PREFAB`](#mots-prefab-prefab)
+* [`mots prefab create PREFAB`](#mots-prefab-create-prefab)
 * [`mots serve [FOLDER]`](#mots-serve-folder)
 
 ## `mots about`
@@ -116,6 +118,44 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
+
+## `mots prefab PREFAB`
+
+Host Prefabs locally. Prefabs are Json files that contains the structure of an API
+
+```
+USAGE
+  $ mots prefab [PREFAB]
+
+ARGUMENTS
+  PREFAB  Prefab to be hosted
+
+DESCRIPTION
+  Host Prefabs locally. Prefabs are Json files that contains the structure of an API
+
+EXAMPLES
+  $ mots prefab
+```
+
+_See code: [dist/commands/prefab/index.ts](https://github.com/yossTheDev/mots/blob/v0.0.6/dist/commands/prefab/index.ts)_
+
+## `mots prefab create PREFAB`
+
+Host Prefabs locally. Prefabs are Json files that contains the structure of an API
+
+```
+USAGE
+  $ mots prefab create [PREFAB]
+
+ARGUMENTS
+  PREFAB  Name of Prefab to be created
+
+DESCRIPTION
+  Host Prefabs locally. Prefabs are Json files that contains the structure of an API
+
+EXAMPLES
+  $ mots prefab create
+```
 
 ## `mots serve [FOLDER]`
 

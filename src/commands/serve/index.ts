@@ -1,8 +1,8 @@
 import { Command, Flags } from '@oclif/core';
 import { Server } from '../../services/server';
-import * as ip from 'ip';
-// eslint-disable-next-line node/no-extraneous-require, unicorn/prefer-module
-const colors = require('ansicolors');
+// import chalks = require('chalk');
+// const chalk = chalks.default;
+// const chalk = (await import('chalk')).default;
 
 export default class Serve extends Command {
 	static description = 'Initialize Server';
@@ -40,27 +40,6 @@ export default class Serve extends Command {
 			flags.port,
 		);
 
-		// Log this
-		console.log(`
-		----------------------------			
-		| ${colors.blue('⚡️ THE SERVER IS READY ⚡️')}|
-		----------------------------
-
-🌐 HOSTS -> Server is running at:
-        -> http://localhost:${port}
-        -> http://${ip.address()}:${port} 
-		`);
-
-		if (args.folder) {
-			if (args.folder.includes(',')) {
-				const f = (args.folder as string).split(',');
-				this.log('📁 FOLDERS:');
-				for (const i of f) console.log(`     -> 📁 ${i}`);
-			} else {
-				this.log(`📁 FOLDER -> ${args.folder}`);
-			}
-		} else {
-			this.log(`📁 FOLDER -> ${this.config.dataDir}/public/`);
-		}
+		Server.logServer(this.config.dataDir, args.folder, port);
 	}
 }

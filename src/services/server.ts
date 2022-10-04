@@ -2,6 +2,9 @@ import { Express } from 'express';
 import express = require('express');
 import { mkdirSync } from 'node:fs';
 import cors = require('cors');
+import { getConfig } from './config';
+import * as ip from 'ip';
+import chalk from 'chalk';
 
 export const Server = {
 	/**
@@ -17,11 +20,12 @@ export const Server = {
 		port: string | number,
 	): Promise<string | number> {
 		// Verify if Public direcotry exist
-		dataDir + mkdirSync(`${dataDir}/public/`, { recursive: true });
+		mkdirSync(`${dataDir}/public/`, { recursive: true });
 
 		// Create express app
 		const app: Express = express();
-		if (!port) port = process.env.PORT || 4000;
+		if (!port)
+			port = process.env.PORT || (await getConfig(dataDir)).defaultPort;
 
 		// Configs
 		app.set('port', port);
@@ -52,5 +56,37 @@ export const Server = {
 		app.listen(port);
 
 		return port;
+	},
+
+	async logServer(
+		dataDir: string,
+		folder: string,
+		port: string | number,
+	): Promise<void> {
+		// const chalk = await import('chalk');
+
+		// Log this
+		console.log(`
+		----------------------------			
+		| ${chalk.blue('⚡️ THE SERVER IS READY ⚡️')}|
+		----------------------------
+
+  🌐 ${chalk.bold('HOSTS')} 
+        -> Server is running at:
+        -> http://localhost:${port}
+        -> http://${ip.address()}:${port} 
+		`);
+
+		if (folder) {
+			if (folder.includes(',')) {
+				const f = (folder as string).split(',');
+				console.log(`  📁 ${chalk.bold('FOLDERS')}:'`);
+				for (const i of f) console.log(`     -> 📁 ${i}`);
+			} else {
+				console.log(`  📁 ${chalk.bold('FOLDERS')} -> ${folder}`);
+			}
+		} else {
+			console.log(`  📁 ${chalk.bold('FOLDERS')} -> ${dataDir}/public/`);
+		}
 	},
 };

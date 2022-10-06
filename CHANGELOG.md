@@ -21,3 +21,9 @@ Ex:
 ``` bash
    mots serve path/to/folder1,path/to/folder2
 ```
+
+## **V 0.0.7**
+
+* Adds Prefabs System
+* Improve console outputs
+* Fix some bugs

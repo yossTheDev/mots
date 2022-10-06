@@ -32,6 +32,8 @@ jobs:
           - macos
           - win
     steps:
+      - name: yarn
+        run: yarn install
       - name: Package into node binary
         uses: lando/pkg-action@v2
         with:

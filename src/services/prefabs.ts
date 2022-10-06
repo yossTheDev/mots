@@ -5,18 +5,25 @@ import express = require('express');
 import path = require('path');
 import * as ip from 'ip';
 import chalk from 'chalk';
+import url from 'node:url';
 
 interface prefab {
 	port: number;
 	paths: endpoint[];
 }
-
 interface endpoint {
 	name: string;
+	params?: param[];
 	folder: string;
 	status: number;
 	type?: string;
+	errorResponse?: string;
 	response: string;
+}
+interface param {
+	name: string;
+	default: any;
+	isRequired: boolean;
 }
 
 // eslint-disable-next-line valid-jsdoc
@@ -58,12 +65,51 @@ export async function getPrefabItem(
 					app.use(express.static(path.folder));
 				}
 
+				let response = '';
+
 				// Create get endpoint
 				app.get(`${path.name}/` || '/', (req, res) => {
+					// console.log(req.params);
+					// console.log(url.parse(req.url));
+
+					if (path.params) {
+						// const responseParams = getParamsFormUrl(req.url, path.params);
+
+						for (const param of path.params) {
+							// Get parameter from url
+							const resParam = url.parse(req.url, true).query[param.name];
+
+							// Verify if this parameter is required
+							if (param.isRequired && resParam) {
+								response = parseParamsInResponse(
+									param.name,
+									resParam as string,
+									path.response,
+								);
+							} else {
+								// If the user does not send the parameter but has a default value,
+								// this is taken as if it was the parameter sent by the user
+								if (param.default) {
+									response = parseParamsInResponse(
+										param.name,
+										param.default,
+										path.response,
+									);
+
+									return res.status(path.status || 200).send(response);
+								}
+
+								// Return Error Response if parameter is not supplied
+								res.status(path.status || 200).send(path.errorResponse);
+								return;
+							}
+						}
+					}
+
 					if (path.type === 'redirect') {
-						res.status(path.status || 200).redirect(path.response);
+						res.status(path.status || 200).redirect(response);
 					} else {
-						res.status(path.status || 200).send(path.response);
+						res.status(path.status || 200).send(response);
 					}
 				});
 			}
@@ -118,6 +164,24 @@ export async function createDefaultPrefab(
 		path.join(dataDir, 'prefabs') + '/' + name + '.json',
 		defaultPrefab,
 	);
+}
+
+/**
+ * Replace the value of the parameters in the response
+ * Ex:
+ * <h1>$ID</h1>
+ * The $ID keyword will be replaced by the value that user has sent for the parameter
+ * @param param Parameter name
+ * @param value Value to replace
+ * @param response Response
+ * @returns Returns the answer with the parameters replaced
+ */
+function parseParamsInResponse(
+	param: string,
+	value: string,
+	response: string,
+): string {
+	return response.replace(`$${param.toUpperCase()}`, value);
 }
 
 // eslint-disable-next-line valid-jsdoc

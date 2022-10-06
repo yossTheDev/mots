@@ -3,10 +3,17 @@
 	"paths": [
 		{ "name": "", "folder": "", "response": "<h1>MOTS</h1>", "status": 200 },
 		{
+			"params": [
+				{
+					"name": "user",
+					"isRequired": true
+				}
+			],
 			"name": "/getError",
 			"type": "redirect",
 			"folder": "",
 			"response": "<h1>Not Found</h1>",
+			"errorResponse": "<h1> $USER is not Defined </h1>",
 			"status": 404
 		},
 		{

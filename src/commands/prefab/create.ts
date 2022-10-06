@@ -4,7 +4,7 @@ import { createDefaultPrefab } from '../../services/prefabs';
 
 export default class Prefabs extends Command {
 	static description =
-		'Host Prefabs locally. Prefabs are Json files that contains the structure of an API';
+		'Create a new prefab with the default structure in the Prefabs folder';
 
 	static examples = ['<%= config.bin %> <%= command.id %>'];
 

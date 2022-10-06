@@ -1,35 +1,94 @@
-# MOTS
 
-![screenshot](img/logo.png)
-![screenshot](img/screen.png)
+<h1 align=center>MOTS</h1>
+
+<img src="img/logo.png"
+        alt="Picture"
+        width="300"
+        height="300"
+        style="display: block; margin: 0 auto" />
+
+<p align=center>
+Simple tool for hosting static files and makes fakes APIs to test your apps.
+Make with ❤️ and Typescript by Yoannis Sánchez Soto</p>
+
 ![npm](https://img.shields.io/npm/v/mots)
 ![downloads/month](https://img.shields.io/npm/dm/mots)
 ![Telegram](https://img.shields.io/badge/t.me/yossthedev-Telegram-BLUE?style=flat&logo=Telegram)
 ![Twitter](https://img.shields.io/twitter/follow/yossthedev?style=social)
 
-**MOTS** (**M**y **O**wn **T**iny **S**erver). A simple tool for hosting static files. Programmed in Typescript.
+<img src="img/screen.png"
+        alt="Picture"
+        width="600"
+        height="300"
+        style="display: block; margin: 0 auto" />
 
-  Make with ❤️ and Typescript
-  by Yoannis Sánchez Soto
-
-## Features
+## 🚀 Features
 
 * Intuitive and easy to use commands
 * CORS enabled by default
 * Hosts multiple folders
+* Makes fake APIs to test your apps **PREFABS**
 
-## TO DO
+## 📦 Prefabs
 
-* Configuration File
+MOTS allows you to create fake apis called Prefabs, these are configurable files with the structure of an API able to respond to parameters and define a response based on this, it can be a file, an html page or anything.
 
-## Map
+This feature is intended to help developers to test their apps without the need to have developed an API before or without the need to be connected all the time.
 
-<!-- toc -->
-* [MOTS](#mots)
-* [Usage](#usage)
-* [Commands](#commands)
-<!-- tocstop -->
-# Usage
+### Creating Prefabs
+
+To create a new Prefab you must enter the following command
+
+    mots prefab create [NAME]
+Just provide a name for the new Prefab.
+
+It will indicate the folder on your computer where it has been saved. For example
+
+    💾 Prefab Saved in /home/user/.local/share/mots/prefabs/new.json
+
+This newly created prefab already has a default structure designed as a starting point, now try to serve it with the following command
+  
+     mots prefab [NAME]
+
+Try entering in your browser the following url to see the change of the parameters **localhost:4004/?user=you**
+
+All prefabs contain the following structure
+
+``` json
+{
+  "port": 4004,
+  "paths": [
+    {
+      "name": "",
+      "folder": "",
+      "response": "<h1>MOTS loves you $USER</h1><h2>Add ?user=[ANY] to url to change the bear for a name or anything else</h2>",
+      "params": [{ "name": "user", "default": "🐼", "isRequired": false }],
+      "status": 200
+    },
+    {
+      "name": "/Error",
+      "folder": "",
+      "response": "<h1>Not Found</h1>",
+      "status": 404
+    },
+    {
+      "name": "/Success",
+      "folder": "",
+      "response": "<h1>Yes, you can 🔥</h1>",
+      "status": 200
+    }
+  ]
+}
+
+```
+
+As you can see they are json files, with different properties easy to understand for any programmer 😁
+
+## 👥 Contribution
+
+Any contribution is always welcome. Please let me know of any bugs you detect in MOTS.
+
+## 👨‍💻 Usage
 <!-- usage -->
 ```sh-session
 $ npm install -g mots
@@ -43,7 +102,7 @@ USAGE
 ...
 ```
 <!-- usagestop -->
-# Commands
+### Commands
 <!-- commands -->
 * [`mots about`](#mots-about)
 * [`mots config`](#mots-config)
@@ -142,7 +201,7 @@ _See code: [dist/commands/prefab/index.ts](https://github.com/yossTheDev/mots/bl
 
 ## `mots prefab create PREFAB`
 
-Host Prefabs locally. Prefabs are Json files that contains the structure of an API
+Create a new prefab with the default structure in the Prefabs folder
 
 ```
 USAGE
@@ -152,7 +211,7 @@ ARGUMENTS
   PREFAB  Name of Prefab to be created
 
 DESCRIPTION
-  Host Prefabs locally. Prefabs are Json files that contains the structure of an API
+  Create a new prefab with the default structure in the Prefabs folder
 
 EXAMPLES
   $ mots prefab create

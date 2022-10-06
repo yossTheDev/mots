@@ -65,43 +65,53 @@ export async function getPrefabItem(
 					app.use(express.static(path.folder));
 				}
 
-				let response = '';
-
 				// Create get endpoint
 				app.get(`${path.name}/` || '/', (req, res) => {
-					// console.log(req.params);
-					// console.log(url.parse(req.url));
+					let response = path.response;
 
 					if (path.params) {
-						// const responseParams = getParamsFormUrl(req.url, path.params);
-
 						for (const param of path.params) {
 							// Get parameter from url
 							const resParam = url.parse(req.url, true).query[param.name];
 
 							// Verify if this parameter is required
-							if (param.isRequired && resParam) {
-								response = parseParamsInResponse(
-									param.name,
-									resParam as string,
-									path.response,
-								);
+							if (param.isRequired) {
+								if (resParam) {
+									// If the parameter is reuired and te user submits it
+									response = parseParamsInResponse(
+										param.name,
+										resParam as string,
+										response,
+									);
+								} else {
+									console.log();
+									// If the parameter is required, but is not sent but has a default value
+									// eslint-disable-next-line max-depth
+									if (param.default) {
+										response = parseParamsInResponse(
+											param.name,
+											param.default,
+											response,
+										);
+									} else {
+										// Parameter not send and not has a default value
+										return res
+											.status(path.status || 200)
+											.send(path.errorResponse);
+									}
+								}
 							} else {
 								// If the user does not send the parameter but has a default value,
 								// this is taken as if it was the parameter sent by the user
-								if (param.default) {
-									response = parseParamsInResponse(
-										param.name,
-										param.default,
-										path.response,
-									);
 
-									return res.status(path.status || 200).send(response);
-								}
-
-								// Return Error Response if parameter is not supplied
-								res.status(path.status || 200).send(path.errorResponse);
-								return;
+								// Optional sended parameter
+								response = resParam
+									? parseParamsInResponse(
+											param.name,
+											resParam as string,
+											response,
+									  )
+									: parseParamsInResponse(param.name, param.default, response);
 							}
 						}
 					}
@@ -124,6 +134,29 @@ export async function getPrefabItem(
 		}
 	}
 }
+
+/* function findParams(name: string, params: param[]) {
+	for (const item of params) {
+		if (item.name === name) return item;
+	}
+} */
+
+/* function extractParams(link: string, response: string, params: param[]) {
+	const urls = new URL('https://localhost:4040' + link);
+	const values = urls.searchParams.entries();
+
+	let r = response;
+
+	// Si este parametro por ejemplo ID existe en la estructura y es un parametro valido en la URl los reemplaza
+	for (const item of values) {
+		const i = findParams(item[0], params);
+		if (i && item[0] === i.name) {
+			r = r.replace(`$${item[0].toUpperCase()}`, item[1]);
+		}
+	}
+
+	return r;
+} */
 
 // eslint-disable-next-line valid-jsdoc
 /**

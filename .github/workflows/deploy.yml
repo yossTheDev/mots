@@ -37,7 +37,7 @@ jobs:
       - name: Package into node binary
         uses: lando/pkg-action@v2
         with:
-          entrypoint: .
+          entrypoint: '.'
           arch: ${{ matrix.arch }}
           node-version: ${{ matrix.node-version }}
           os: ${{ matrix.os }}

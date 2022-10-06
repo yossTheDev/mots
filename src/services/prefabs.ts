@@ -175,7 +175,14 @@ export async function createDefaultPrefab(
 	const defaultPrefab: prefab = {
 		port: 4004,
 		paths: [
-			{ name: '', folder: '', response: '<h1>MOTS</h1>', status: 200 },
+			{
+				name: '',
+				folder: '',
+				response:
+					'<h1>MOTS loves you $USER</h1><h2>Add ?user=[ANY] to url to change the bear for a name or anything else</h2>',
+				params: [{ name: 'user', default: '🐼', isRequired: false }],
+				status: 200,
+			},
 			{
 				name: '/Error',
 				folder: '',

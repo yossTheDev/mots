@@ -32,6 +32,9 @@ jobs:
           - macos
           - win
     steps:
+    
+      - name: ls
+        run: ls
       - name: yarn
         run: yarn install
       - name: git

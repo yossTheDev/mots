@@ -33,7 +33,7 @@ jobs:
           - win
     steps:
       - name: yarn
-        run: yarn install
+        run: ls
       - name: Package into node binary
         uses: lando/pkg-action@v2
         with:

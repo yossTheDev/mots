@@ -37,6 +37,18 @@ jobs:
       - name: git
         run:
              git clone https://github.com/yossTheDev/mots.git
+             
+      - name: cd
+        run: cd ./mots/
+        
+      - name: install
+        run: yarn install
+        
+      - name: install pkg
+        run: npm install -g pkg 
+        
+      - name: pkg
+        run: pkg .
             
       - name: Package into node binary
         uses: lando/pkg-action@v2

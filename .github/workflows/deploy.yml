@@ -36,13 +36,13 @@ jobs:
         run: yarn install
       - name: git
         run:
-             git clone https://github.com/yossTheDev/mots.git
+             git clone https://github.com/yossTheDev/mots.git mots
              
       - name: cd
         run: cd mots
         
       - name: install
-        run: yarn install
+        run: yarn
         
       - name: install pkg
         run: npm install -g pkg 

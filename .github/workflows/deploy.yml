@@ -38,6 +38,9 @@ jobs:
         run:
              git clone https://github.com/yossTheDev/mots.git mots
              
+      - name: ls
+        run: ls
+             
       - name: cd
         run: cd mots
         

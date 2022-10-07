@@ -32,7 +32,10 @@ jobs:
           - macos
           - win
     steps:
-      - name: yarn
+     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      
+      - name: ls
         run: ls
       - name: Package into node binary
         uses: lando/pkg-action@v2

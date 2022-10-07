@@ -32,43 +32,11 @@ jobs:
           - macos
           - win
     steps:
-    
-      - name: ls
-        run: ls
-      - name: yarn
-        run: yarn install
-      - name: git
-        run:
-             git clone https://github.com/yossTheDev/mots.git mots
-             
-      - name: ls
-        run: ls
-             
-      - name: cd
-        run: cd mots
-        
-      - name: ls
-        run: ls
-        
-      - name: cd
-        run: cd mots
-        
-      - name: install
-        run: yarn
-        
-      - name: ls
-        run: ls
-        
-      - name: install pkg
-        run: npm install -g pkg 
-        
-      - name: pkg
-        run: pkg .
-            
+ 
       - name: Package into node binary
         uses: lando/pkg-action@v2
         with:
-          entrypoint: './'
+          entrypoint: 'bin/'
           arch: ${{ matrix.arch }}
           node-version: ${{ matrix.node-version }}
           os: ${{ matrix.os }}

@@ -41,6 +41,12 @@ jobs:
       - name: cd
         run: cd mots
         
+      - name: ls
+        run: ls
+        
+      - name: cd
+        run: cd mots
+        
       - name: install
         run: yarn
         

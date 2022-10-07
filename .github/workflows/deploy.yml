@@ -44,6 +44,9 @@ jobs:
       - name: install
         run: yarn
         
+      - name: ls
+        run: ls
+        
       - name: install pkg
         run: npm install -g pkg 
         

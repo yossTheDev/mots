@@ -34,6 +34,7 @@ Ex:
 
 * Some bug fixed
 * Improve console outputs
+* Clean code
 
 ### Prefabs
 

@@ -9,6 +9,7 @@ import cors = require('cors');
 import url from 'node:url';
 import { Server } from 'node:http';
 
+// #region
 interface prefab {
 	port: number;
 	paths: endpoint[];
@@ -28,6 +29,7 @@ interface param {
 	default: any;
 	isRequired: boolean;
 }
+// #endregion
 
 // eslint-disable-next-line valid-jsdoc
 /**
@@ -130,6 +132,13 @@ export async function getPrefab(
 	return server;
 }
 
+// eslint-disable-next-line valid-jsdoc
+/**
+ *  Serve prefabs locally
+ * @param dataDir Mots data dir
+ * @param prefab Name of the prefab to be hosted
+ *
+ */
 export async function servePrefab(
 	dataDir: string,
 	prefab: string,

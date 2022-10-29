@@ -1,5 +1,5 @@
 import { Command, Flags } from '@oclif/core';
-import { logServer, init } from '../../services/server';
+import { logServer, server } from '../../services/server';
 
 // import chalks = require('chalk');
 // const chalk = chalks.default;
@@ -35,8 +35,9 @@ export default class Serve extends Command {
 		const { args, flags } = await this.parse(Serve);
 
 		// Initialize server and get the app port
-		const port = await init(this.config.dataDir, args.folder, flags.port);
+		const port = await server(this.config.dataDir, args.folder, flags.port);
 
+		// Log server
 		logServer(this.config.dataDir, args.folder, port);
 	}
 }

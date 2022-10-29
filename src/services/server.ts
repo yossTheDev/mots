@@ -6,7 +6,7 @@ import { getConfig } from './config';
 import * as ip from 'ip';
 import chalk from 'chalk';
 
-export async function init(
+export async function server(
 	dataDir: string,
 	folder: string,
 	port: string | number,

@@ -1,6 +1,6 @@
 {
 	"name": "mots",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"description": "MOTS is a simple tool for hosting static files. Programmed in Typescript",
 	"author": "Yoannis Sanchez Soto",
 	"bin": "./bin/run",

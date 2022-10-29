@@ -1,5 +1,5 @@
 import { Command } from '@oclif/core';
-import { getPrefabItem } from '../../services/prefabs';
+import { servePrefab } from '../../services/prefabs';
 
 export default class Prefabs extends Command {
 	static description =
@@ -20,8 +20,10 @@ export default class Prefabs extends Command {
 	public async run(): Promise<void> {
 		const { args } = await this.parse(Prefabs);
 
-		if (!(await getPrefabItem(this.config.dataDir, args.prefab))) {
+		/* if (!(await serverdPrefab(this.config.dataDir, args.prefab))) {
 			this.error('Incorrect Prefab Name');
-		}
+		} */
+
+		await servePrefab(this.config.dataDir, args.prefab);
 	}
 }

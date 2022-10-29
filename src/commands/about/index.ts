@@ -15,7 +15,7 @@ export default class About extends Command {
 		this.log(`
         -----------------------
         |        ${colors.blue('MOTS')}         |
-        |       V0.0.7        |
+        |       V0.0.8        |
         -----------------------
 
        Make with ❤️ and Typescript

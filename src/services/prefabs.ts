@@ -5,11 +5,14 @@ import express = require('express');
 import path = require('path');
 import * as ip from 'ip';
 import chalk from 'chalk';
+import cors = require('cors');
 import url from 'node:url';
+import { Server } from 'node:http';
 
 interface prefab {
 	port: number;
 	paths: endpoint[];
+	cors: boolean;
 }
 interface endpoint {
 	name: string;
@@ -32,10 +35,105 @@ interface param {
  * @param dataDir MOTS data dir
  * @param prefab  Prefab Name
  */
-export async function getPrefabItem(
+export async function getPrefab(
 	dataDir: string,
 	prefab: string,
-): Promise<boolean> {
+): Promise<Server> {
+	// Read Prefab File
+	const prefabItem = (await fs.readJson(
+		`${dataDir}/prefabs/${prefab}.json`,
+	)) as prefab;
+
+	// Create Express app
+	const app: Express = express();
+	const port = prefabItem.port;
+
+	// Verify is CORS is used
+	if (prefabItem.cors) {
+		app.use(cors());
+	}
+
+	// Get all paths and serve Prefab item
+	for (const path of prefabItem.paths) {
+		// If folder property is provided, serve this folder
+		if (path.folder) {
+			// if folder property contains spacial varialbles
+			// like $DATADIR, replace this
+			if (path.folder.includes('$DATADIR')) {
+				// Serve static folder
+				app.use(express.static(path.folder.replace('$DATADIR', dataDir)));
+			} else {
+				// Serve static folder
+				app.use(express.static(path.folder));
+			}
+		}
+
+		// Create get endpoint
+		app.get(`${path.name}/` || '/', (req, res) => {
+			let response = path.response;
+
+			if (path.params) {
+				for (const param of path.params) {
+					// Get parameter from url
+					const resParam = url.parse(req.url, true).query[param.name];
+
+					// Verify if this parameter is required
+					if (param.isRequired) {
+						if (resParam) {
+							// If the parameter is reuired and te user submits it
+							response = parseParamsInResponse(
+								param.name,
+								resParam as string,
+								response,
+							);
+						} else {
+							console.log();
+							// If the parameter is required, but is not sent but has a default value
+							// eslint-disable-next-line max-depth
+							if (param.default) {
+								response = parseParamsInResponse(
+									param.name,
+									param.default,
+									response,
+								);
+							} else {
+								// Parameter not send and not has a default value
+								return res.status(path.status || 200).send(path.errorResponse);
+							}
+						}
+					} else {
+						// If the user does not send the parameter but has a default value,
+						// this is taken as if it was the parameter sent by the user
+
+						// Optional sended parameter
+						response = resParam
+							? parseParamsInResponse(param.name, resParam as string, response)
+							: parseParamsInResponse(param.name, param.default, response);
+					}
+				}
+			}
+
+			if (path.type === 'redirect') {
+				res.status(path.status || 200).redirect(response);
+			} else {
+				res.status(path.status || 200).send(response);
+			}
+		});
+	}
+
+	// App listen
+	const server = app.listen(port);
+
+	// Logging
+	logPrefab(prefabItem.paths, port);
+
+	return server;
+}
+
+export async function servePrefab(
+	dataDir: string,
+	prefab: string,
+): Promise<void> {
 	// Get prefabs folder or create it
 	fs.mkdirSync(`${dataDir}/prefabs`, { recursive: true });
 
@@ -43,120 +141,28 @@ export async function getPrefabItem(
 	const files = fs.readdirSync(path.join(dataDir, 'prefabs'));
 
 	for (const item of files) {
-		// Verify if prefab item exists and it is valid
 		if (
 			path.extname(item) === '.json' &&
 			path.basename(item) === prefab + '.json'
 		) {
+			// Serve Prefab item
 			// eslint-disable-next-line no-await-in-loop
-			const prefabItem = (await fs.readJson(
-				path.join(dataDir, 'prefabs', item),
-			)) as prefab;
+			let app = await getPrefab(dataDir, prefab);
 
-			// Create express app
-			const app: Express = express();
-			const port = prefabItem.port;
+			fs.watchFile(`${dataDir}/prefabs/${prefab}.json`, async () => {
+				// Notify Reloading
+				console.log(`
+				⚡️ ${chalk.bold('RELOADING SERVER')} ⚡️`);
 
-			// Serve prefab item, get all paths
-			for (const path of prefabItem.paths) {
-				// If folder property is provided, serve this folder
-				if (path.folder) {
-					// Serve static folder
-					app.use(express.static(path.folder));
-				}
+				// Close previous server
+				app.close();
 
-				// Create get endpoint
-				app.get(`${path.name}/` || '/', (req, res) => {
-					let response = path.response;
-
-					if (path.params) {
-						for (const param of path.params) {
-							// Get parameter from url
-							const resParam = url.parse(req.url, true).query[param.name];
-
-							// Verify if this parameter is required
-							if (param.isRequired) {
-								if (resParam) {
-									// If the parameter is reuired and te user submits it
-									response = parseParamsInResponse(
-										param.name,
-										resParam as string,
-										response,
-									);
-								} else {
-									console.log();
-									// If the parameter is required, but is not sent but has a default value
-									// eslint-disable-next-line max-depth
-									if (param.default) {
-										response = parseParamsInResponse(
-											param.name,
-											param.default,
-											response,
-										);
-									} else {
-										// Parameter not send and not has a default value
-										return res
-											.status(path.status || 200)
-											.send(path.errorResponse);
-									}
-								}
-							} else {
-								// If the user does not send the parameter but has a default value,
-								// this is taken as if it was the parameter sent by the user
-
-								// Optional sended parameter
-								response = resParam
-									? parseParamsInResponse(
-											param.name,
-											resParam as string,
-											response,
-									  )
-									: parseParamsInResponse(param.name, param.default, response);
-							}
-						}
-					}
-
-					if (path.type === 'redirect') {
-						res.status(path.status || 200).redirect(response);
-					} else {
-						res.status(path.status || 200).send(response);
-					}
-				});
-			}
-
-			// App listen
-			app.listen(port);
-
-			// Logging
-			logPrefab(prefabItem.paths, port);
-
-			return true;
+				// Start new server
+				app = await getPrefab(dataDir, prefab);
+			});
 		}
 	}
 }
-
-/* function findParams(name: string, params: param[]) {
-	for (const item of params) {
-		if (item.name === name) return item;
-	}
-} */
-
-/* function extractParams(link: string, response: string, params: param[]) {
-	const urls = new URL('https://localhost:4040' + link);
-	const values = urls.searchParams.entries();
-
-	let r = response;
-
-	// Si este parametro por ejemplo ID existe en la estructura y es un parametro valido en la URl los reemplaza
-	for (const item of values) {
-		const i = findParams(item[0], params);
-		if (i && item[0] === i.name) {
-			r = r.replace(`$${item[0].toUpperCase()}`, item[1]);
-		}
-	}
-
-	return r;
-} */
 
 // eslint-disable-next-line valid-jsdoc
 /**
@@ -174,6 +180,7 @@ export async function createDefaultPrefab(
 	// Set default prefab data
 	const defaultPrefab: prefab = {
 		port: 4004,
+		cors: true,
 		paths: [
 			{
 				name: '',
@@ -234,7 +241,7 @@ async function logPrefab(paths: endpoint[], port: number) {
 	// Log this
 	console.log(`
 	----------------------------			
-	| ${chalk.blue('⚡️ THE SERVER IS READY ⚡️')}|
+	| ${chalk.bold(chalk.blue('⚡️ THE SERVER IS READY ⚡️'))}|
 	----------------------------
 
   🌐 ${chalk.bold('HOSTS')} 

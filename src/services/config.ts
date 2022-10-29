@@ -8,7 +8,7 @@ interface config {
 }
 
 /**
- * Get MOTS user configuration file
+ * Get MOTS User-Configuration file
  * @param dataDir MOTS data directory
  * @returns config
  */

@@ -1,7 +1,7 @@
 
 <h1 align="center">MOTS</h1>
 
-<img align="center" src="img/logo.png" width="200" height="200" alt="MOTS Logo">
+<img align="center" src="img/logo.png"  alt="MOTS Logo">
 
 <p align="center">
 Simple tool for hosting static files and makes fakes APIs to test your apps.
@@ -13,6 +13,7 @@ Make with ❤️ and Typescript by Yoannis Sánchez Soto</p>
 ![Twitter](https://img.shields.io/twitter/follow/yossthedev?style=social)
 
 <img src="img/screen.png"
+align="center"
         alt="Picture"
         style="display: block; margin: 0 auto" />
 

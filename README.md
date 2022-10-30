@@ -1,9 +1,9 @@
 
-<h1 align=center>MOTS</h1>
+<h1 align="center">MOTS</h1>
 
 <img align="center" src="img/logo.png" width="200" height="200" alt="Mots Logo">
 
-<p align=center>
+<p align="center">
 Simple tool for hosting static files and makes fakes APIs to test your apps.
 Make with ❤️ and Typescript by Yoannis Sánchez Soto</p>
 

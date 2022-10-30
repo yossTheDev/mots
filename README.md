@@ -1,7 +1,7 @@
 
 <h1 align="center">MOTS</h1>
 
-<img align="center" src="img/logo.png" width="200" height="200" alt="Mots Logo">
+<img align="center" src="img/logo.png" width="200" height="200" alt="MOTS Logo">
 
 <p align="center">
 Simple tool for hosting static files and makes fakes APIs to test your apps.
